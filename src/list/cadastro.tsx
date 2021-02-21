@@ -25,10 +25,13 @@ class Todo extends Component<{}, State> {
           task={this.state.newTask}
           onAdd={this.addTask}
           onChange={this.handleTaskChange}
+          
         />
+        
         <TasksList tasks={this.state.tasks} onDelete={this.deleteTask} />
       </div>
     );
+
   }
 
   private addTask = (event: React.FormEvent<HTMLFormElement>) => {

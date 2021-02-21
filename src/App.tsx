@@ -1,84 +1,107 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import todo from "../src/list/todo";
+import React, {useState} from 'react';
+import {Link, useRouteMatch} from 'react-router-dom';
+import {
+    Wrapper,
+    HeaderMenu, 
+    OptionMenu,
+    LinksDiv, 
+    LinkElement, 
+    StrongText,
+} from '../src/styled';
+import {
+    Home, 
+    List, 
+    Delete, 
+    Edit, 
+    Check, 
+} from 'react-feather';
 
-const Main = styled("div")`
-  font-family: sans-serif;
-  background: #f0f0f0;
-  height: 100vh;
-`;
+const App = () => {
+    const [open, setOpen] = useState(true);
 
-const DropDownContainer = styled("div")`
-  width: 10.5em;
-  margin: 0 auto;
-`;
+    const routerMatch = useRouteMatch();
 
-const DropDownHeader = styled("div")`
-  margin-bottom: 0.8em;
-  padding: 0.4em 2em 0.4em 1em;
-  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15);
-  font-weight: 500;
-  font-size: 1.3rem;
-  color: #3faffa;
-  background: #ffffff;
-`;
+    return (
+        <>
 
-const DropDownListContainer = styled("div")``;
+            <Wrapper>
+                <HeaderMenu>
+                    <OptionMenu 
+                        open={open} 
+                        onClick={() => setOpen(!open)}>
+                        <div />
+                        <div />
+                        <div />
+                    </OptionMenu>
+                </HeaderMenu>
 
-const DropDownList = styled("ul")`
-  padding: 0;
-  margin: 0;
-  padding-left: 1em;
-  background: #ffffff;
-  border: 2px solid #e5e5e5;
-  box-sizing: border-box;
-  color: #3faffa;
-  font-size: 1.3rem;
-  font-weight: 500;
-  &:first-child {
-    padding-top: 0.8em;
-  }
-`;
+                <LinksDiv open={open}>
+                    <Link 
+                        to="/"
+                        style={{textDecoration: 'none'}}
+                    >
+                        <LinkElement>
+                            <Home color='#CACACA' />
+                            <StrongText
+                                color={routerMatch.path === '/' ? 'active' : 'deactive'}
+                            >MENU</StrongText>
+                        </LinkElement>
+                    </Link>
 
-const ListItem = styled("li")`
-  list-style: none;
-  margin-bottom: 0.8em;
-`;
+                    <Link 
+                        to='/cadastro'
+                        style={{textDecoration: 'none'}}
+                    >
+                        <LinkElement>
+                            <Edit color='#CACACA'/>
+                            <StrongText
+                                color={routerMatch.path === '/navigation' ? 'active' : 'deactive'}
+                            >Cadastro de TODO</StrongText>
+                        </LinkElement>
+                    </Link>
 
-const options = ["Cadastrar Tarefas", "Visualizar Lista", "Deletar Tarefa"];
+                    <Link 
+                        to='/lista'
+                        style={{textDecoration: 'none'}}
+                    >
+                        <LinkElement>
+                            <List color='#CACACA' />
+                            <StrongText
+                                color={routerMatch.path === "/roundconfig" ? "active" : "deactive"}
+                            >Lista de Tarefas</StrongText>
+                        </LinkElement>
+                    </Link>
 
-export default function App() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(null);
+                    <Link 
+                        to='/Delete'
+                        style={{textDecoration: 'none'}}
+                    >
+                        <LinkElement>
+                            <Delete color='#CACACA'/>
+                            <StrongText
+                                color={routerMatch.path === '/inspection' ? 'active' : 'deactive'}
+                            >Deletar item da Lista</StrongText>
+                        </LinkElement>
+                    </Link>
 
-  const toggling = () => setIsOpen(!isOpen);
+                    <Link 
+                        to='/check'
+                        style={{textDecoration: 'none'}}
+                    >
+                        <LinkElement>
+                            <Check color='#CACACA' />
+                            <StrongText
+                                color={routerMatch.path === '/roundhistory' ? 'active' : 'deactive'}
+                            >
+                                Check list
+                            </StrongText>
+                        </LinkElement>
+                    </Link>
 
-  const onOptionClicked = (value: any) => () => {
-    setSelectedOption(value);
-    setIsOpen(false);
-    console.log(selectedOption);
-  };
-
-  return (
-    <Main>
-      <h1>Lista de Tarefas</h1>
-      <DropDownContainer>
-        <DropDownHeader onClick={toggling}>
-          {selectedOption || "MENU"}
-        </DropDownHeader>
-        {isOpen && (
-          <DropDownListContainer>
-            <DropDownList>
-              {options.map(option => (
-                <ListItem onClick={onOptionClicked(option)} key={Math.random()}>
-                  {option}
-                </ListItem>
-              ))}
-            </DropDownList>
-          </DropDownListContainer>
-        )}
-      </DropDownContainer>
-    </Main>
-  );
+                </LinksDiv>
+            </Wrapper>
+        </>
+    );
 }
 
+export default App; 
