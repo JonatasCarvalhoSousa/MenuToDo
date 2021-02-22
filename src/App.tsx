@@ -11,21 +11,19 @@ import {
 import {
     Home, 
     List, 
-    Delete, 
-    Edit, 
-    Check, 
+    Activity, 
+    Edit,  
 } from 'react-feather';
 
 const App = () => {
     const [open, setOpen] = useState(true);
-
     const routerMatch = useRouteMatch();
 
     return (
         <>
-
             <Wrapper>
                 <HeaderMenu>
+                    <h1>Lista de Tarefas</h1>
                     <OptionMenu 
                         open={open} 
                         onClick={() => setOpen(!open)}>
@@ -34,7 +32,7 @@ const App = () => {
                         <div />
                     </OptionMenu>
                 </HeaderMenu>
-
+                <h2>Abra o Menu, veja suas vantagens e cadastre suas tarefas</h2>
                 <LinksDiv open={open}>
                     <Link 
                         to="/"
@@ -47,6 +45,29 @@ const App = () => {
                             >MENU</StrongText>
                         </LinkElement>
                     </Link>
+                    <Link 
+                        to='/historiaTodo'
+                        style={{textDecoration: 'none'}}
+                    >
+                        <LinkElement>
+                            <List color='#CACACA' />
+                            <StrongText
+                                color={routerMatch.path === "/roundconfig" ? "active" : "deactive"}
+                            >Historia sobre Lista de Tarefas</StrongText>
+                        </LinkElement>
+                    </Link>
+
+                    <Link 
+                        to='/VantagensTodo'
+                        style={{textDecoration: 'none'}}
+                    >
+                        <LinkElement>
+                            <Activity color='#CACACA'/>
+                            <StrongText
+                                color={routerMatch.path === '/inspection' ? 'active' : 'deactive'}
+                            >Vantagens sobre lista de tarefas</StrongText>
+                        </LinkElement>
+                    </Link>
 
                     <Link 
                         to='/cadastro'
@@ -56,48 +77,9 @@ const App = () => {
                             <Edit color='#CACACA'/>
                             <StrongText
                                 color={routerMatch.path === '/navigation' ? 'active' : 'deactive'}
-                            >Cadastro de TODO</StrongText>
+                            >Cadastrar tarefas</StrongText>
                         </LinkElement>
                     </Link>
-
-                    <Link 
-                        to='/lista'
-                        style={{textDecoration: 'none'}}
-                    >
-                        <LinkElement>
-                            <List color='#CACACA' />
-                            <StrongText
-                                color={routerMatch.path === "/roundconfig" ? "active" : "deactive"}
-                            >Lista de Tarefas</StrongText>
-                        </LinkElement>
-                    </Link>
-
-                    <Link 
-                        to='/Delete'
-                        style={{textDecoration: 'none'}}
-                    >
-                        <LinkElement>
-                            <Delete color='#CACACA'/>
-                            <StrongText
-                                color={routerMatch.path === '/inspection' ? 'active' : 'deactive'}
-                            >Deletar item da Lista</StrongText>
-                        </LinkElement>
-                    </Link>
-
-                    <Link 
-                        to='/check'
-                        style={{textDecoration: 'none'}}
-                    >
-                        <LinkElement>
-                            <Check color='#CACACA' />
-                            <StrongText
-                                color={routerMatch.path === '/roundhistory' ? 'active' : 'deactive'}
-                            >
-                                Check list
-                            </StrongText>
-                        </LinkElement>
-                    </Link>
-
                 </LinksDiv>
             </Wrapper>
         </>

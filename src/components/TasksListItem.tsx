@@ -1,6 +1,6 @@
 import React, { StatelessComponent } from "react";
-
 import { Task } from "../models/task";
+import { AddTask } from '../styled';
 
 export interface TasksListItemProps {
   task: Task;
@@ -16,8 +16,11 @@ export const TaskListItem: StatelessComponent<TasksListItemProps> = ({
   };
 
   return (
-    <li>
-      {task.name} <button onClick={onClick}>X</button>
-    </li>
+    <ul>
+      <li>
+        {task.name} <AddTask onClick={onClick}>Concluido \o/</AddTask>
+      </li>
+    </ul>
+    
   );
 };

@@ -2,23 +2,29 @@ import React, { Component } from "react";
 import { Task } from "../models/task";
 import { NewTaskForm } from "../components/NewTaskForm";
 import { TasksList } from "../components/taskList";
+import { Wrapper } from '../styled';
 
 interface State {
   newTask: Task;
   tasks: Task[];
+  
 }
 
 class Todo extends Component<{}, State> {
+  
   state = {
     newTask: {
       id: 1,
       name: ""
     },
     tasks: []
+    
   };
 
   render() {
+
     return (
+      <Wrapper>       
       <div>
         <h2>Insira aqui suas tarefas</h2>
         <NewTaskForm
@@ -30,11 +36,13 @@ class Todo extends Component<{}, State> {
         
         <TasksList tasks={this.state.tasks} onDelete={this.deleteTask} />
       </div>
+      </Wrapper>
+      
     );
 
   }
-
   private addTask = (event: React.FormEvent<HTMLFormElement>) => {
+
     event.preventDefault();
 
     this.setState(previousState => ({
